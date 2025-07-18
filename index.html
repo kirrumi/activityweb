@@ -18,7 +18,7 @@ h1 {
   color: #444;
 }
 
-/* Модальное окно */
+/* Модалка */
 .modal {
   display: none;
   position: fixed;
@@ -73,8 +73,6 @@ button:hover {
 .hidden {
   display: none;
 }
-
-/* Анимация появления */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
@@ -85,7 +83,7 @@ button:hover {
 
 <h1>Ожидание запуска…</h1>
 
-<!-- Модалка -->
+<!-- Модальное окно -->
 <div class="modal" id="myModal">
   <div class="modal-content">
     <h2>Status Update</h2>
@@ -99,7 +97,7 @@ button:hover {
 
       <div id="whyBlock" class="hidden">
         <label for="why">Explain why you have a delay</label>
-        <textarea id="why" name="why" rows="3"></textarea>
+        <textarea id="why" name="why" rows="3" placeholder="Your explanation..."></textarea>
       </div>
 
       <label for="delay">Delay (e.g. 10 min, 15 min)</label>
@@ -111,16 +109,15 @@ button:hover {
 </div>
 
 <script>
-// Показываем модалку по параметру ?showModal=true
+// Показываем модалку, если в URL есть ?showModal=true
 const params = new URLSearchParams(window.location.search);
 if (params.get('showModal') === 'true') {
   document.getElementById('myModal').style.display = 'flex';
 }
 
-// Логика скрытия/показа поля "why"
+// Логика появления поля "Explain why..." если выбрано No
 const readySelect = document.getElementById('ready');
 const whyBlock = document.getElementById('whyBlock');
-
 readySelect.addEventListener('change', () => {
   if (readySelect.value === 'No') {
     whyBlock.classList.remove('hidden');
@@ -132,7 +129,6 @@ readySelect.addEventListener('change', () => {
 // Отправка формы
 document.getElementById('myForm').addEventListener('submit', async (e) => {
   e.preventDefault();
-
   const data = {
     ready: readySelect.value,
     why: document.getElementById('why').value,
@@ -148,6 +144,10 @@ document.getElementById('myForm').addEventListener('submit', async (e) => {
     alert('✅ Данные отправлены!');
     document.getElementById('myModal').style.display = 'none';
   } catch (err) {
-    alert('❌ Ошибка при отправке: ' + err);
+    alert('❌ Ошибка: ' + err);
   }
-}
+});
+</script>
+
+</body>
+</html>
