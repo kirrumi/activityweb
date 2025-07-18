@@ -14,9 +14,7 @@ body {
   justify-content: center;
   align-items: center;
 }
-h1 {
-  color: #444;
-}
+h1 { color: #444; }
 
 /* Модалка */
 .modal {
@@ -67,12 +65,10 @@ button {
   cursor: pointer;
   transition: background 0.2s;
 }
-button:hover {
-  background: #0056b3;
-}
-.hidden {
-  display: none;
-}
+button:hover { background: #0056b3; }
+
+.hidden { display: none; }
+
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
@@ -81,9 +77,8 @@ button:hover {
 </head>
 <body>
 
-<h1>Wait…</h1>
+<h1>Ожидание запуска…</h1>
 
-<!-- Модальное окно -->
 <div class="modal" id="myModal">
   <div class="modal-content">
     <h2>Status Update</h2>
@@ -95,13 +90,13 @@ button:hover {
         <option value="No">No</option>
       </select>
 
-      <div id="whyBlock" class="hidden">
+      <div id="extraFields" class="hidden">
         <label for="why">Explain why you have a delay</label>
         <textarea id="why" name="why" rows="3" placeholder="Your explanation..."></textarea>
-      </div>
 
-      <label for="delay">Delay (e.g. 10 min, 15 min)</label>
-      <input type="text" id="delay" name="delay" placeholder="e.g. 10 min">
+        <label for="delay">Delay (e.g. 10 min, 15 min)</label>
+        <input type="text" id="delay" name="delay" placeholder="e.g. 10 min">
+      </div>
 
       <button type="submit">Send</button>
     </form>
@@ -115,14 +110,14 @@ if (params.get('showModal') === 'true') {
   document.getElementById('myModal').style.display = 'flex';
 }
 
-// Логика появления поля "Explain why..." если выбрано No
+// Логика отображения дополнительных полей
 const readySelect = document.getElementById('ready');
-const whyBlock = document.getElementById('whyBlock');
+const extraFields = document.getElementById('extraFields');
 readySelect.addEventListener('change', () => {
   if (readySelect.value === 'No') {
-    whyBlock.classList.remove('hidden');
+    extraFields.classList.remove('hidden');
   } else {
-    whyBlock.classList.add('hidden');
+    extraFields.classList.add('hidden');
   }
 });
 
